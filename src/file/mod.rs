@@ -26,8 +26,8 @@ pub struct RecentFile {
 }
 
 impl FileManager {
-    pub fn new(settings: &crate::settings::Settings) -> Result<Self> {
-        let config_dir = crate::settings::Settings::config_dir()?;
+    pub fn new(settings: &digital_canvas::settings::Settings) -> Result<Self> {
+        let config_dir = digital_canvas::settings::Settings::config_dir()?;
         let autosave_dir = config_dir.join("autosave");
         let project_dir = config_dir.join("projects");
         
@@ -45,7 +45,7 @@ impl FileManager {
         Ok(manager)
     }
 
-    pub fn new_document(&self, width: u32, height: u32, settings: &crate::settings::Settings) -> Result<Document> {
+    pub fn new_document(&self, width: u32, height: u32, settings: &digital_canvas::settings::Settings) -> Result<Document> {
         Document::new(
             DocumentId::new(),
             "Untitled",
@@ -55,7 +55,7 @@ impl FileManager {
         )
     }
 
-    pub fn open(&self, path: &Path, settings: &crate::settings::Settings) -> Result<Document> {
+    pub fn open(&self, path: &Path, settings: &digital_canvas::settings::Settings) -> Result<Document> {
         let extension = path.extension()
             .and_then(|e| e.to_str())
             .unwrap_or("")
@@ -121,7 +121,7 @@ impl FileManager {
             let entry = entry?;
             let path = entry.path();
             if path.extension().map(|e| e == "dcv").unwrap_or(false) {
-                if let Ok(doc) = self.open_native(&path, &crate::settings::Settings::default()) {
+                if let Ok(doc) = self.open_native(&path, &digital_canvas::settings::Settings::default()) {
                     documents.push(doc);
                 }
             }
@@ -161,7 +161,7 @@ impl FileManager {
         Ok(count)
     }
 
-    fn open_image(&self, path: &Path, settings: &crate::settings::Settings) -> Result<Document> {
+    fn open_image(&self, path: &Path, settings: &digital_canvas::settings::Settings) -> Result<Document> {
         let img = image::open(path)?;
         let rgba = img.to_rgba8();
         let (width, height) = rgba.dimensions();
@@ -215,7 +215,7 @@ impl FileManager {
         Ok(composite)
     }
 
-    fn open_psd(&self, path: &Path, settings: &crate::settings::Settings) -> Result<Document> {
+    fn open_psd(&self, path: &Path, settings: &digital_canvas::settings::Settings) -> Result<Document> {
         let bytes = fs::read(path)?;
         let psd = Psd::from_bytes(&bytes)?;
         let (width, height) = (psd.width(), psd.height());
@@ -264,7 +264,7 @@ impl FileManager {
         Ok(())
     }
 
-    fn open_native(&self, path: &Path, settings: &crate::settings::Settings) -> Result<Document> {
+    fn open_native(&self, path: &Path, settings: &digital_canvas::settings::Settings) -> Result<Document> {
         let data = std::fs::read(path)?;
         let project: NativeProject = bincode::deserialize(&data)?;
         
@@ -385,7 +385,7 @@ impl FileManager {
     }
 
     fn load_recent_files(&mut self) -> Result<()> {
-        let path = crate::settings::Settings::config_dir()?.join("recent_files.json");
+        let path = digital_canvas::settings::Settings::config_dir()?.join("recent_files.json");
         if path.exists() {
             let data = std::fs::read_to_string(path)?;
             self.recent_files = serde_json::from_str(&data)?;
@@ -394,7 +394,7 @@ impl FileManager {
     }
 
     fn save_recent_files(&self) -> Result<()> {
-        let path = crate::settings::Settings::config_dir()?.join("recent_files.json");
+        let path = digital_canvas::settings::Settings::config_dir()?.join("recent_files.json");
         let data = serde_json::to_string_pretty(&self.recent_files)?;
         std::fs::write(path, data)?;
         Ok(())
@@ -419,7 +419,7 @@ pub struct NativeProject {
     pub background_color: Color,
     pub layers: Vec<NativeLayerData>,
     pub timelapse: Option<Vec<u8>>,
-    pub metadata: crate::document::DocumentMetadata,
+    pub metadata: digital_canvas::document::DocumentMetadata,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

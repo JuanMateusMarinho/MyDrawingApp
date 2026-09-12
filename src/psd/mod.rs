@@ -8,13 +8,13 @@ use std::fs;
 pub struct PsdImporter;
 
 impl PsdImporter {
-    pub fn import(path: &Path, settings: &crate::settings::Settings) -> Result<Document> {
+    pub fn import(path: &Path, settings: &digital_canvas::settings::Settings) -> Result<Document> {
         let bytes = fs::read(path)?;
         let psd = Psd::from_bytes(&bytes)?;
         let (width, height) = (psd.width(), psd.height());
 
         let mut doc = Document::new(
-            crate::document::DocumentId::new(),
+            digital_canvas::document::DocumentId::new(),
             path.file_stem().and_then(|s| s.to_str()).unwrap_or("PSD Import"),
             width,
             height,

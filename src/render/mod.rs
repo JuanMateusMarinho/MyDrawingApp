@@ -115,7 +115,7 @@ pub struct Renderer {
 }
 
 impl Renderer {
-    pub fn new(window: Arc<Window>, settings: &crate::settings::Settings) -> Result<Self> {
+    pub fn new(window: Arc<Window>, settings: &digital_canvas::settings::Settings) -> Result<Self> {
         let size = window.inner_size();
         let width = size.width.max(1);
         let height = size.height.max(1);

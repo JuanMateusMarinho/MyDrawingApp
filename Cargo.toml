@@ -11,6 +11,9 @@ readme = "README.md"
 [workspace]
 resolver = "2"
 
+[patch.crates-io]
+image = { path = "C:/Users/juan-/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/image-0.20.1" }
+
 [dependencies]
 # GPU Rendering
 wgpu = { version = "23", features = ["wgsl"] }
@@ -26,7 +29,7 @@ glam = "0.27"
 kurbo = "0.10"
 
 # Image Processing
-image = { version = "0.25", features = ["default", "png", "jpeg", "gif", "bmp", "tiff", "webp", "pnm", "ico", "dds", "exr", "hdr", "tga", "qoi", "avif", "ff", "color_quant", "rayon", "serde"] }
+image = { version = "0.20", features = ["png", "jpeg", "gif", "bmp", "tiff", "webp", "pnm", "ico"] }
 # imageproc = "0.22"
 
 # File Formats

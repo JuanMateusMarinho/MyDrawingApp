@@ -27,7 +27,7 @@ impl FilterEngine {
         self.filters.push(Box::new(Pixelate::default()));
     }
 
-    pub fn apply_filter(&self, filter_name: &str, layer: &mut Layer, params: &FilterParams, renderer: &crate::render::Renderer) -> Result<()> {
+    pub fn apply_filter(&self, filter_name: &str, layer: &mut Layer, params: &FilterParams, renderer: &digital_canvas::render::Renderer) -> Result<()> {
         if let Some(filter) = self.filters.iter().find(|f| f.name() == filter_name) {
             filter.apply(layer, params, renderer)
         } else {
@@ -51,7 +51,7 @@ impl FilterEngine {
 pub trait Filter: Send + Sync {
     fn name(&self) -> &str;
     fn info(&self) -> FilterInfo;
-    fn apply(&self, layer: &mut Layer, params: &FilterParams, renderer: &crate::render::Renderer) -> Result<()>;
+    fn apply(&self, layer: &mut Layer, params: &FilterParams, renderer: &digital_canvas::render::Renderer) -> Result<()>;
     fn default_params(&self) -> FilterParams;
     fn validate_params(&self, params: &FilterParams) -> Result<()>;
 }
@@ -197,7 +197,7 @@ macro_rules! filter_struct {
                 }
             }
 
-            fn apply(&self, layer: &mut Layer, params: &FilterParams, renderer: &crate::render::Renderer) -> Result<()> {
+            fn apply(&self, layer: &mut Layer, params: &FilterParams, renderer: &digital_canvas::render::Renderer) -> Result<()> {
                 Self::apply_impl(layer, params, renderer)
             }
 
@@ -211,7 +211,7 @@ macro_rules! filter_struct {
         }
 
         impl $name {
-            fn apply_impl(layer: &mut Layer, params: &FilterParams, renderer: &crate::render::Renderer) -> Result<()> {
+            fn apply_impl(layer: &mut Layer, params: &FilterParams, renderer: &digital_canvas::render::Renderer) -> Result<()> {
                 // Implementation would use compute shaders or CPU fallback
                 Ok(())
             }

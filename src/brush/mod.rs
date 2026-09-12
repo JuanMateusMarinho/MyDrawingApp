@@ -227,7 +227,7 @@ impl Default for BrushEngineSettings {
 }
 
 impl BrushEngine {
-    pub fn new(settings: &crate::settings::BrushSettings) -> Self {
+    pub fn new(settings: &digital_canvas::settings::BrushSettings) -> Self {
         let mut engine = Self {
             brushes: HashMap::new(),
             active_brush: None,

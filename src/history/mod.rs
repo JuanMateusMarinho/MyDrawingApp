@@ -31,8 +31,8 @@ pub enum HistoryAction {
     MaskProperty { layer_id: u64, property: MaskProperty, old_value: f32, new_value: f32 },
     
     // Adjustment layer operations
-    AddAdjustment { layer_id: u64, adjustment_type: crate::layer::AdjustmentType, params: Vec<f32> },
-    RemoveAdjustment { layer_id: u64, adjustment_type: crate::layer::AdjustmentType, params: Vec<f32> },
+    AddAdjustment { layer_id: u64, adjustment_type: digital_canvas::layer::AdjustmentType, params: Vec<f32> },
+    RemoveAdjustment { layer_id: u64, adjustment_type: digital_canvas::layer::AdjustmentType, params: Vec<f32> },
     AdjustmentParams { layer_id: u64, old_params: Vec<f32>, new_params: Vec<f32> },
     
     // Document operations
@@ -442,7 +442,7 @@ impl Layer {
     fn restore_texture_region(&mut self, _region: Rect, _data: &[u8]) {}
     fn restore_mask(&mut self, _data: &MaskData) {}
     fn restore_mask_region(&mut self, _region: Rect, _data: &[u8]) {}
-    fn adjustment_mut(&mut self) -> Option<&mut crate::layer::AdjustmentLayer> {
+    fn adjustment_mut(&mut self) -> Option<&mut digital_canvas::layer::AdjustmentLayer> {
         None
     }
     fn apply_mask(&mut self, _data: &MaskData) {}

@@ -4,7 +4,7 @@ use digital_canvas::{
 };
 use anyhow::Result;
 use std::sync::Arc;
-use crate::render::Renderer;
+use digital_canvas::render::Renderer;
 
 pub struct Canvas {
     viewport_offset: Vec2,
@@ -21,7 +21,7 @@ pub struct Canvas {
 }
 
 impl Canvas {
-    pub fn new(renderer: &mut Renderer, settings: &crate::settings::Settings) -> Result<Self> {
+    pub fn new(renderer: &mut Renderer, settings: &digital_canvas::settings::Settings) -> Result<Self> {
         Ok(Self {
             viewport_offset: Vec2::zero(),
             viewport_scale: 1.0,

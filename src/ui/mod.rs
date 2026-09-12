@@ -7,11 +7,11 @@ slint::include_modules!();
 
 pub struct UiManager {
     main_window: MainWindow,
-    settings: crate::settings::Settings,
+    settings: digital_canvas::settings::Settings,
 }
 
 impl UiManager {
-    pub fn new(settings: &crate::settings::Settings) -> Result<Self, slint::PlatformError> {
+    pub fn new(settings: &digital_canvas::settings::Settings) -> Result<Self, slint::PlatformError> {
         let main_window = MainWindow::new()?;
         
         let mut ui = Self {

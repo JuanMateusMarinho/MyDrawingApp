@@ -3,7 +3,7 @@ use anyhow::Result;
 use image::{Rgba, ImageBuffer};
 use std::sync::{Arc, RwLock};
 use uuid::Uuid;
-use crate::render::Renderer;
+use digital_canvas::render::Renderer;
 
 type RgbaImage = ImageBuffer<Rgba<u8>, Vec<u8>>;
 
@@ -54,7 +54,7 @@ impl Document {
         name: &str,
         width: u32,
         height: u32,
-        settings: &crate::settings::Settings,
+        settings: &digital_canvas::settings::Settings,
     ) -> Result<Self> {
         let background_layer = Layer::new(
             LayerId::new(),

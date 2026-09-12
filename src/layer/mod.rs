@@ -1,7 +1,7 @@
 use digital_canvas::{LayerId, Color, Rect, Vec2, BlendMode, Transform2D, EntityId};
 use anyhow::Result;
 use std::sync::Arc;
-use crate::render::{Renderer, LayerUniforms};
+use digital_canvas::render::{Renderer, LayerUniforms};
 
 #[derive(Debug, Clone)]
 pub struct Layer {
@@ -371,7 +371,7 @@ impl Layer {
     pub fn apply_brush_stroke(
         &mut self,
         points: &[BrushPoint],
-        brush: &crate::brush::Brush,
+        brush: &digital_canvas::brush::Brush,
         color: Color,
         renderer: &Renderer,
     ) -> Result<()> {

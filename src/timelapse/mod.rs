@@ -422,7 +422,7 @@ impl TimelapseRecorder {
         });
     }
 
-    pub fn record_adjustment_add(&mut self, layer_id: LayerId, adj_type: crate::layer::AdjustmentType) {
+    pub fn record_adjustment_add(&mut self, layer_id: LayerId, adj_type: digital_canvas::layer::AdjustmentType) {
         let timestamp = self.get_timestamp();
         self.add_event(TimelapseEvent {
             timestamp,

@@ -17,9 +17,9 @@ pub trait Plugin: Send + Sync {
 
 pub struct PluginContext {
     pub document: Option<Arc<Mutex<Document>>>,
-    pub settings: Arc<Mutex<crate::settings::Settings>>,
-    pub brush_engine: Arc<Mutex<crate::brush::BrushEngine>>,
-    pub file_manager: Arc<Mutex<crate::file::FileManager>>,
+    pub settings: Arc<Mutex<digital_canvas::settings::Settings>>,
+    pub brush_engine: Arc<Mutex<digital_canvas::brush::BrushEngine>>,
+    pub file_manager: Arc<Mutex<digital_canvas::file::FileManager>>,
     pub commands: Arc<Mutex<CommandRegistry>>,
     pub ui_extension: Arc<Mutex<UiExtension>>,
 }
@@ -28,9 +28,9 @@ impl PluginContext {
     pub fn new() -> Self {
         Self {
             document: None,
-            settings: Arc::new(Mutex::new(crate::settings::Settings::default())),
-            brush_engine: Arc::new(Mutex::new(crate::brush::BrushEngine::new(&crate::settings::BrushSettings::default()).unwrap())),
-            file_manager: Arc::new(Mutex::new(crate::file::FileManager::new(&crate::settings::Settings::default()).unwrap())),
+            settings: Arc::new(Mutex::new(digital_canvas::settings::Settings::default())),
+            brush_engine: Arc::new(Mutex::new(digital_canvas::brush::BrushEngine::new(&digital_canvas::settings::BrushSettings::default()).unwrap())),
+            file_manager: Arc::new(Mutex::new(digital_canvas::file::FileManager::new(&digital_canvas::settings::Settings::default()).unwrap())),
             commands: Arc::new(Mutex::new(CommandRegistry::new())),
             ui_extension: Arc::new(Mutex::new(UiExtension::new())),
         }
