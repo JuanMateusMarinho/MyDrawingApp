@@ -1,0 +1,262 @@
+export component MainWindow inherits Window {
+    title: "DigitalCanvas";
+    width: 1600px;
+    height: 1000px;
+
+    in-out property<float> brush_size: 20.0;
+    in-out property<float> brush_opacity: 1.0;
+    in-out property<string> active_tool: "brush";
+
+    callback tool_selected(string);
+    callback brush_size_changed(float);
+    callback brush_opacity_changed(float);
+    callback new_document();
+    callback open_document();
+    callback save_document();
+    callback undo();
+    callback redo();
+
+    VerticalLayout {
+        // Top toolbar
+        HorizontalLayout {
+            height: 40px;
+            padding: 16px;
+            spacing: 16px;
+
+            Text { 
+                text: "DigitalCanvas - Untitled";
+                color: #ffffff;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            HorizontalLayout {
+                spacing: 8px;
+                
+                TouchArea {
+                    width: 60px;
+                    height: 28px;
+                    clicked => { new_document(); }
+                    Rectangle { 
+                        background: #333333;
+                        border-width: 1px;
+                        border-color: #444444;
+                        Text { text: "New"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                    }
+                }
+                TouchArea {
+                    width: 60px;
+                    height: 28px;
+                    clicked => { open_document(); }
+                    Rectangle { 
+                        background: #333333;
+                        border-width: 1px;
+                        border-color: #444444;
+                        Text { text: "Open"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                    }
+                }
+                TouchArea {
+                    width: 60px;
+                    height: 28px;
+                    clicked => { save_document(); }
+                    Rectangle { 
+                        background: #333333;
+                        border-width: 1px;
+                        border-color: #444444;
+                        Text { text: "Save"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                    }
+                }
+                TouchArea {
+                    width: 60px;
+                    height: 28px;
+                    clicked => { undo(); }
+                    Rectangle { 
+                        background: #333333;
+                        border-width: 1px;
+                        border-color: #444444;
+                        Text { text: "Undo"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                    }
+                }
+                TouchArea {
+                    width: 60px;
+                    height: 28px;
+                    clicked => { redo(); }
+                    Rectangle { 
+                        background: #333333;
+                        border-width: 1px;
+                        border-color: #444444;
+                        Text { text: "Redo"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                    }
+                }
+            }
+
+            HorizontalLayout {
+                alignment: end;
+                spacing: 8px;
+
+                Text { 
+                    text: "Tool: " + active_tool; 
+                    color: #cccccc;
+                    font-size: 13px;
+                }
+                Text { 
+                    text: "Brush: " + brush_size + "px @" + (round(brush_opacity * 100)) + "%"; 
+                    color: #cccccc;
+                    font-size: 13px;
+                }
+            }
+        }
+
+        // Main content area
+        HorizontalLayout {
+            // Left toolbar
+            VerticalLayout {
+                width: 60px;
+                spacing: 4px;
+                padding: 8px;
+
+                Text { text: "TOOLS"; color: #888888; font-size: 11px; font-weight: 600; }
+                
+                TouchArea {
+                    width: 100%;
+                    height: 32px;
+                    clicked => { tool_selected("brush"); }
+                    Rectangle { 
+                        background: active_tool == "brush" ? #0078d4 : #333333;
+                        border-width: 1px;
+                        border-color: #444444;
+                        Text { text: "Brush"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                    }
+                }
+                TouchArea {
+                    width: 100%;
+                    height: 32px;
+                    clicked => { tool_selected("eraser"); }
+                    Rectangle { 
+                        background: active_tool == "eraser" ? #0078d4 : #333333;
+                        border-width: 1px;
+                        border-color: #444444;
+                        Text { text: "Eraser"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                    }
+                }
+                TouchArea {
+                    width: 100%;
+                    height: 32px;
+                    clicked => { tool_selected("move"); }
+                    Rectangle { 
+                        background: active_tool == "move" ? #0078d4 : #333333;
+                        border-width: 1px;
+                        border-color: #444444;
+                        Text { text: "Move"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                    }
+                }
+                TouchArea {
+                    width: 100%;
+                    height: 32px;
+                    clicked => { tool_selected("select"); }
+                    Rectangle { 
+                        background: active_tool == "select" ? #0078d4 : #333333;
+                        border-width: 1px;
+                        border-color: #444444;
+                        Text { text: "Select"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                    }
+                }
+            }
+
+            // Center canvas
+            Rectangle {
+                width: 100%;
+                height: 100%;
+                background: #252526;
+                
+                Text { 
+                    text: "Canvas Area"; 
+                    color: #666666; 
+                    font-size: 24px; 
+                    horizontal-alignment: center;
+                    vertical-alignment: center;
+                }
+            }
+
+            // Right panel
+            Rectangle {
+                width: 300px;
+                background: #1e1e1e;
+
+                VerticalLayout {
+                    padding: 12px;
+                    spacing: 8px;
+                    Text { text: "BRUSH SETTINGS"; color: #cccccc; font-size: 11px; font-weight: 600; }
+                    
+                    VerticalLayout {
+                        spacing: 4px;
+                        Text { text: "Size"; color: #ffffff; font-size: 12px; }
+                        Rectangle {
+                            height: 20px;
+                            background: #333333;
+                            border-width: 1px;
+                            border-color: #444444;
+                        }
+                    }
+
+                    VerticalLayout {
+                        spacing: 4px;
+                        Text { text: "Opacity"; color: #ffffff; font-size: 12px; }
+                        Rectangle {
+                            height: 20px;
+                            background: #333333;
+                            border-width: 1px;
+                            border-color: #444444;
+                        }
+                    }
+                }
+
+                Text { text: "LAYERS"; color: #cccccc; font-size: 11px; font-weight: 600; }
+                
+                VerticalLayout {
+                    spacing: 4px;
+                    TouchArea {
+                        width: 100%;
+                        height: 28px;
+                        Rectangle { 
+                            background: #333333;
+                            border-width: 1px;
+                            border-color: #444444;
+                            Text { text: "New Layer"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                        }
+                    }
+                    TouchArea {
+                        width: 100%;
+                        height: 28px;
+                        Rectangle { 
+                            background: #333333;
+                            border-width: 1px;
+                            border-color: #444444;
+                            Text { text: "Duplicate"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                        }
+                    }
+                    TouchArea {
+                        width: 100%;
+                        height: 28px;
+                        Rectangle { 
+                            background: #333333;
+                            border-width: 1px;
+                            border-color: #444444;
+                            Text { text: "Delete"; color: #ffffff; font-size: 13px; horizontal-alignment: center; vertical-alignment: center; }
+                        }
+                    }
+                }
+
+                Text { text: "COLOR"; color: #cccccc; font-size: 11px; font-weight: 600; }
+                
+                Rectangle {
+                    height: 60px;
+                    background: #333333;
+                    border-width: 1px;
+                    border-color: #444444;
+                    Text { text: "Color Picker"; color: #888888; horizontal-alignment: center; vertical-alignment: center; }
+                }
+            }
+        }
+    }
+}

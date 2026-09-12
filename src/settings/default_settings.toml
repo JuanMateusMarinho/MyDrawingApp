@@ -1,0 +1,124 @@
+[general]
+language = "en"
+check_updates = true
+anonymous_usage_stats = false
+reset_warnings = false
+
+[interface]
+theme = "Dark"
+ui_scale = 1.0
+font_size = 13.0
+show_tooltips = true
+tooltip_delay = 500
+panel_opacity = 0.95
+compact_mode = false
+show_scrollbars = true
+animate_panels = true
+
+[canvas]
+default_width = 1920
+default_height = 1080
+default_dpi = 300.0
+default_background_color = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
+max_canvas_size = 16384
+show_grid = false
+grid_size = 50.0
+grid_color = { r = 0.5, g = 0.5, b = 0.5, a = 0.3 }
+show_rulers = true
+ruler_units = "Pixels"
+snap_to_grid = false
+snap_to_guides = true
+canvas_rotation_snap = 15.0
+zoom_steps = [0.125, 0.25, 0.33, 0.5, 0.67, 1.0, 1.5, 2.0, 3.0, 4.0, 5.0, 8.0, 10.0, 16.0, 25.0, 50.0, 100.0]
+fit_to_screen_on_open = true
+
+[brush]
+default_size = 20.0
+min_size = 0.5
+max_size = 5000.0
+default_opacity = 1.0
+default_flow = 1.0
+default_hardness = 0.5
+smoothing_enabled = true
+smoothing_factor = 0.3
+stabilization_enabled = true
+stabilization_factor = 0.5
+pressure_curve_enabled = true
+cursor_type = "BrushOutline"
+show_brush_outline = true
+outline_color = { r = 0.0, g = 0.0, b = 0.0, a = 0.5 }
+crosshair_size = 10.0
+
+[tablet]
+enable_windows_ink = true
+enable_wintab = false
+pressure_curve = [{ x = 0.0, y = 0.0 }, { x = 0.25, y = 0.15 }, { x = 0.5, y = 0.5 }, { x = 0.75, y = 0.85 }, { x = 1.0, y = 1.0 }]
+click_threshold = 0.5
+double_click_distance = 10.0
+double_click_time = 300
+touch_enabled = true
+touch_gestures = true
+
+[tablet.pen_buttons]
+lower_button = "RightClick"
+upper_button = "Pan"
+eraser_tip = "Eraser"
+eraser_button = "None"
+
+[shortcuts]
+scheme = "Photoshop"
+shortcuts = { "tool.brush" = { key = "B", ctrl = false, shift = false, alt = false }, "tool.eraser" = { key = "E", ctrl = false, shift = false, alt = false }, "tool.move" = { key = "V", ctrl = false, shift = false, alt = false }, "tool.marquee" = { key = "M", ctrl = false, shift = false, alt = false }, "tool.lasso" = { key = "L", ctrl = false, shift = false, alt = false }, "tool.magic_wand" = { key = "W", ctrl = false, shift = false, alt = false }, "tool.eyedropper" = { key = "I", ctrl = false, shift = false, alt = false }, "tool.gradient" = { key = "G", ctrl = false, shift = false, alt = false }, "tool.crop" = { key = "C", ctrl = false, shift = false, alt = false }, "tool.zoom" = { key = "Z", ctrl = false, shift = false, alt = false }, "tool.hand" = { key = "H", ctrl = false, shift = false, alt = false }, "tool.rotate" = { key = "R", ctrl = false, shift = false, alt = false }, "tool.text" = { key = "T", ctrl = false, shift = false, alt = false }, "tool.pen" = { key = "P", ctrl = false, shift = false, alt = false }, "tool.clone_stamp" = { key = "S", ctrl = false, shift = false, alt = false }, "tool.healing" = { key = "J", ctrl = false, shift = false, alt = false }, "edit.undo" = { key = "Z", ctrl = true, shift = false, alt = false }, "edit.redo" = { key = "Z", ctrl = true, shift = true, alt = false }, "edit.copy" = { key = "C", ctrl = true, shift = false, alt = false }, "edit.paste" = { key = "V", ctrl = true, shift = false, alt = false }, "edit.cut" = { key = "X", ctrl = true, shift = false, alt = false }, "edit.select_all" = { key = "A", ctrl = true, shift = false, alt = false }, "edit.deselect" = { key = "D", ctrl = true, shift = false, alt = false }, "edit.transform" = { key = "T", ctrl = true, shift = false, alt = false }, "file.new" = { key = "N", ctrl = true, shift = false, alt = false }, "file.open" = { key = "O", ctrl = true, shift = false, alt = false }, "file.save" = { key = "S", ctrl = true, shift = false, alt = false }, "file.save_as" = { key = "S", ctrl = true, shift = true, alt = false }, "brush.size_decrease" = { key = "[", ctrl = false, shift = false, alt = false }, "brush.size_increase" = { key = "]", ctrl = false, shift = false, alt = false }, "brush.hardness_decrease" = { key = "{", ctrl = false, shift = false, alt = false }, "brush.hardness_increase" = { key = "}", ctrl = false, shift = false, alt = false }, "view.zoom_in" = { key = "=", ctrl = true, shift = false, alt = false }, "view.zoom_out" = { key = "-", ctrl = true, shift = false, alt = false }, "view.fit_screen" = { key = "0", ctrl = true, shift = false, alt = false }, "view.actual_pixels" = { key = "1", ctrl = true, shift = false, alt = false }, "view.toggle_fullscreen" = { key = "F", ctrl = false, shift = false, alt = false }, "layer.new" = { key = "N", ctrl = true, shift = true, alt = false }, "layer.duplicate" = { key = "J", ctrl = true, shift = false, alt = false }, "layer.merge_down" = { key = "E", ctrl = true, shift = false, alt = false }, "layer.group" = { key = "G", ctrl = true, shift = false, alt = false } }
+
+[performance]
+gpu_acceleration = true
+preferred_backend = "Auto"
+max_texture_size = 8192
+enable_multithreading = true
+thread_count = 8
+memory_limit_mb = 4096
+cache_size_mb = 512
+vsync = true
+low_latency_mode = true
+background_processing = true
+
+[color]
+working_space = "SRGB"
+display_profile = ""
+proof_profile = ""
+proof_intent = "RelativeColorimetric"
+black_point_compensation = true
+warn_profile_mismatch = true
+warn_missing_profile = true
+rgb_working_space = "SRGB"
+cmyk_working_space = "USWebCoatedSWOP"
+gray_working_space = "GrayGamma22"
+spot_working_space = "DotGain20"
+
+[timelapse]
+enabled = true
+fps = 30
+playback_speed = 1.0
+export_resolution = [1920, 1080]
+max_events = 100000
+capture_interval_ms = 100
+include_ui = false
+include_cursor = false
+
+[autosave]
+enabled = true
+interval_minutes = 5
+max_versions = 10
+save_on_focus_loss = true
+save_on_idle = true
+idle_timeout_seconds = 30
+
+[file_formats]
+default_export_format = "PNG"
+png_compression = 6
+jpeg_quality = 90
+webp_quality = 85.0
+webp_lossless = false
+tiff_compression = "LZW"
+psd_compatibility = true
+include_thumbnail = true
+embed_color_profile = true

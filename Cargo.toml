@@ -1,0 +1,91 @@
+[package]
+name = "digital_canvas"
+version = "0.1.0"
+edition = "2024"
+description = "Professional digital art and image editing application"
+authors = ["DigitalCanvas Team"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/digitalcanvas/digital-canvas"
+readme = "README.md"
+
+[workspace]
+resolver = "2"
+
+[dependencies]
+# GPU Rendering
+wgpu = { version = "23", features = ["wgsl"] }
+wgpu-hal = { version = "23", features = ["vulkan", "dx12", "metal", "gles"] }
+bytemuck = "1.16"
+pollster = "0.3"
+
+# UI Framework
+slint = { version = "1.5", features = ["renderer-winit-femtovg", "std"] }
+
+# Math & Geometry
+glam = "0.27"
+kurbo = "0.10"
+
+# Image Processing
+image = { version = "0.25", features = ["default", "png", "jpeg", "gif", "bmp", "tiff", "webp", "pnm", "ico", "dds", "exr", "hdr", "tga", "qoi", "avif", "ff", "color_quant", "rayon", "serde"] }
+# imageproc = "0.22"
+
+# File Formats
+psd = "0.3"
+zip = "0.6"
+bincode = "1.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+ron = "0.8"
+
+# Input & Tablet
+winit = { version = "0.30", features = ["serde"] }
+raw-window-handle = "0.6"
+windows = { version = "0.58", features = ["Win32_Foundation", "Win32_UI_Input_Ime", "Win32_UI_WindowsAndMessaging", "Win32_Graphics_Direct2D", "Win32_Graphics_Gdi"] }
+
+chrono = { version = "0.4", features = ["serde"] }
+
+# Async & Concurrency
+tokio = { version = "1.38", features = ["full"] }
+crossbeam = "0.8"
+parking_lot = "0.12"
+once_cell = "1.19"
+
+# Logging & Diagnostics
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+color-eyre = "0.6"
+anyhow = "1.0"
+
+# Configuration
+config = { version = "0.14", features = ["toml"] }
+directories = "5.0"
+
+# Utilities
+uuid = { version = "1.8", features = ["v4", "serde", "fast-rng"] }
+smallvec = "1.13"
+slotmap = "1.0"
+ahash = "0.8"
+
+[build-dependencies]
+slint-build = "1.5"
+
+[dev-dependencies]
+pretty_assertions = "1.4"
+rstest = "0.18"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+opt-level = 3
+panic = "abort"
+
+[profile.dev]
+opt-level = 1
+debug = true
+
+[features]
+default = []
+metal = ["wgpu-hal/metal"]
+vulkan = ["wgpu-hal/vulkan"]
+dx12 = ["wgpu-hal/dx12"]
+gles = ["wgpu-hal/gles"]
